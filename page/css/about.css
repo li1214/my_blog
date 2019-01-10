@@ -18,22 +18,7 @@
     color: #191919;
     font-size: 14px;
 }
-.liuyan{
-    width: 100%;
-    margin-top: 20px;
-}
-.liuyan-item{
-    width: 100%;
-    border:1px #7ca4c1 dashed;
-    background-color: #d9edf7;
-    margin-top: 15px;
-    padding: 20px;
-    box-sizing: border-box;
-}
-.liuyan-item span,.liuyan-item p{
-    font-size: 14px;
-    color: #31708f;
-}
+
 .subly{
     width: 100%;
     margin-top: 20px;
