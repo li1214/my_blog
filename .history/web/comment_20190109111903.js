@@ -1,3 +1,0 @@
-
-
-var path = new Map();
