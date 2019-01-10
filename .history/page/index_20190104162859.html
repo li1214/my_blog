@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>个人博客</title>
+    <link href="./css/base.css" rel="stylesheet" type="text/css" />
+    <link href="./css/index.css" rel="stylesheet" type="text/css" />
+    <script src='./js/vue.js'></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <a>个人博客 | 技术博客</a>
+        <ul>
+          <li><a href="">首页</a></li>
+          <li><a href="">地图</a></li>
+          <li><a href="">关于</a></li>
+          <li><a href="">留言</a></li>
+        </ul>
+        <div class="search">
+          <input type="text" placeholder="输入关键字查找" />
+          <button>搜索</button>
+        </div>
+      </div>
+    </header>
+    <div class="content">
+      <div class="content-left">
+        <div class="every-day" id='every_day'>
+          <span>每日一句</span>
+          <p>{{content}}</p>
+          <p>{{english}}</p>
+        </div>
+        <div class="blog-list" id='blogList'>
+          <div class="blog" v-for='item in list' :key='item.id'>
+            <a><h3>{{item.title}}</h3></a>
+            <p>{{item.text}}</p>
+            <div class="blog-foot">
+              发布于{{item.time}} | 浏览({{item.reads}}) | Tags：<template v-for='tag in item.tags'>{{tag | tagfliter}}</template>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-right" id='random_tags' >
+        <div class="right-box">
+          <h4 :style='{color:color}'>随机标签云</h4>
+          <div class="contents">
+            <a v-for = 'tag in tags' v-bind:style='{color:randomColor(),fontSize:randomSize()}'>{{tag}}</a>
+          </div>
+        </div>
+        <div class="right-box" style="padding-bottom: 0;">
+          <h4>最近热门</h4>
+          {{msg}}
+          <div class="contents">
+            <ul class="list-group">
+              <li class="list-group-item" v-for='item in hots' :key='item.id'>
+                <a :href="item.link"
+                  >{{item.title}}</a
+                >
+              </li>
+             
+            </ul>
+          </div>
+        </div>
+        <div class="right-box">
+          <h4 :style='{color:color}'>最新评论</h4>
+          <div class="contents">
+            <div class='item'>
+                <div class='item-title'>
+                    <span>代码狗</span>
+                    <span class='spanr'>[一周前]</span>
+                </div>
+                <p class='item-comtebt'>
+                    抱歉，由于种种原因，本站不再链接至贵
+                </p>
+            </div>
+            <div class='item'>
+                <div class='item-title'>
+                    <span>代码狗</span>
+                    <span class='spanr'>[一周前]</span>
+                </div>
+                <p class='item-comtebt'>
+                    抱歉，由于种种原因，本站不再链接至贵
+                </p>
+            </div>
+            <div class='item'>
+                <div class='item-title'>
+                    <span>代码狗</span>
+                    <span class='spanr'>[一周前]</span>
+                </div>
+                <p class='item-comtebt'>
+                    抱歉，由于种种原因，本站不再链接至贵
+                </p>
+            </div>
+            <div class='item'>
+                <div class='item-title'>
+                    <span>代码狗</span>
+                    <span class='spanr'>[一周前]</span>
+                </div>
+                <p class='item-comtebt'>
+                    抱歉，由于种种原因，本站不再链接至贵
+                </p>
+            </div>
+            <div class='item'>
+                <div class='item-title'>
+                    <span>代码狗</span>
+                    <span class='spanr'>[一周前]</span>
+                </div>
+                <p class='item-comtebt'>
+                    抱歉，由于种种原因，本站不再链接至贵
+                </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+        <ul>
+            <li>C++</li>
+            <li>Java</li>
+            <li>PHP</li>
+            <li>JavaScript</li>
+            <li>Html</li>
+            <li>Css</li>
+            <li>Node</li>
+            <li>Vue</li>
+            <li>Webpack</li>
+            <li>GitHub</li>
+        </ul>
+        <p>Copyright © 2010-2017 郑晓个人博客 All rights reserved. 由免费开源的WordPress强力驱动. 鲁ICP备14017955号站长统计</p>
+    </footer>
+    <script src='./js/index.js'></script>
+    <script src='./js/base.js'></script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+
+.every-day{
+    background-color: white;
+    text-align: left;
+    width: 100%;
+    border-radius: 6px;
+    padding: 5px 10px;
+    box-shadow: 3px 4px 3px #888;
+    margin-top: 25px;
+}
+.every-day span::before{
+    font-family: myicon;
+    content:'\e122';
+    font-size: 14px;
+    color: #f60;
+    position: absolute;
+    display: block;
+    left: 90px;
+}
+.every-day > span{
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+    color: slateblue;
+}
+.every-day > p{
+    /* zuanwu */
+}
+
+.blog-list{
+    margin-top: 20px;
+    width: 100%;
+    position: relative;
+}
+.blog-list .blog{
+    width: 100%;
+    border:1px solid #333;
+    border-radius: 6px;
+}

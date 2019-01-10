@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>个人博客</title>
+    <link href="./css/base.css" rel="stylesheet" type="text/css" />
+    <link href="./css/blog.css" rel="stylesheet" type="text/css" />
+    <script src='./js/vue.js'></script>
+    <script src='./js/axios.min.js'></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a>个人博客 | 技术博客</a>
+            <ul>
+                <li><a href="">首页</a></li>
+                <li><a href="">地图</a></li>
+                <li><a href="">关于</a></li>
+                <li><a href="">留言</a></li>
+            </ul>
+            <div class="search">
+                <input type="text" placeholder="输入关键字查找" />
+                <button>搜索</button>
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <div class="content-left">
+            <div class="blog">
+                <div class='blog-head'>
+                    <div>当前位置：<a href='./index.html'>博客首页</a>>><a href='./map.html'>博客列表</a>>>阅读征文</div>
+                    <h3 class='blog-title'>四联杀幽门螺杆菌第三天</h3>
+                    <div>作者：李恭兆 发布于 <span>2018-10-30 09:12</span></div>
+                </div>
+                <div class='blog-content'></div>
+            </div>
+            <div class='subly'>
+                <form action="">
+                    <span>发表评论:</span>
+                    <div>
+                        <input type="text" placeholder="昵称">
+                        <input type="email" placeholder="邮箱(评论回复时你能收到通知)" style="width:300px;margin-left: 30px;">
+                    </div>
+                    <textarea placeholder="无意义的内容我可能不会回复你"></textarea>
+                    <div>
+                        <input type="text" placeholder="验证码">
+                        <img class='codeimg' style='margin-left:30px'>
+                    </div>
+                    <div>
+                        <button class='submit'>提交</button>
+                        <button class='reset'>重写</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="content-right" id='random_tags'>
+            <div class="right-box">
+                <h4 :style='{color:color}'>随机标签云</h4>
+                <div class="contents">
+                    <a v-for='tag in tags' v-bind:style='{color:randomColor(),fontSize:randomSize()}'>{{tag.tag}}</a>
+                </div>
+            </div>
+            <div class="right-box" style="padding-bottom: 0;">
+                <h4 :style='{color:color}'>最近热门</h4>
+                {{msg}}
+                <div class="contents">
+                    <ul class="list-group">
+                        <li class="list-group-item" v-for='item in hots' :key='item.id'>
+                            <a :href="item.link">{{item.title}}</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="right-box">
+                <h4 :style='{color:color}'>最新评论</h4>
+                <div class="contents">
+                    <div class='item' v-for='item in comments'>
+                        <div class='item-title'>
+                            <span>{{item.name}}</span>
+                            <span class='spanr'>[{{item.date}}]</span>
+                        </div>
+                        <p class='item-comtebt'>
+                            {{item.text}}
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <ul>
+            <li>C++</li>
+            <li>Java</li>
+            <li>PHP</li>
+            <li>JavaScript</li>
+            <li>Html</li>
+            <li>Css</li>
+            <li>Node</li>
+            <li>Vue</li>
+            <li>Webpack</li>
+            <li>GitHub</li>
+        </ul>
+        <p>Copyright © 2010-2017 郑晓个人博客 All rights reserved. 由免费开源的WordPress强力驱动. 鲁ICP备14017955号站长统计</p>
+    </footer>
+    <script src='./js/base.js'></script>
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+.about-me > h4{
+    display: inline-block;
+    padding: 10px 0;
+    width: 100$;
+    border-bottom: 1px solid #191919;
+}

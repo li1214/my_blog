@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>博客编辑发布</title>
+    <link rel='stylesheet'  href='./css/bootstrap-theme.min.css'>
+    <script src="./js/wangEditor.min.js"></script>
+    <script src='./js/jquery.js'></script>
+</head>
+<body>
+    <div class='container'>
+        <h2 style="text-align: center;">博客后台编辑页面</h2>
+        <form class="form-horizontal" style='margin-top:30px;width: 850px;'>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">选择发布的类型</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id='editorType'>
+                        <option value='blog'>博客</option>
+                        <option value='everyday'>每日一句</option>
+                    </select>
+                </div>
+            </div>
+            <div class='editor-blog' id='blogBox'>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">文章标题</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="title" placeholder="请输入文章标题">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">文章标签</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="tags" placeholder="请输入文章标签">
+                        <em style="color:red;font-size:12px;margin-top:10px;display: inline-block;"> 多个标签用逗号分割</em>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="blog" class="col-sm-2 control-label">编辑文章</label>
+                    <div class="col-sm-10">
+                        <div ref="blog">
+                
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='editor-everyday' id='everydayEdirot'>
+                <div class="form-group">
+                    <label for="blog" class="col-sm-2 control-label">编辑每日一句</label>
+                    <div class="col-sm-10">
+                        <div ref="everyday">
+                
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button  class="btn btn-default" @click.prevent='submit'>发布</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        
+    </script>
+    <script src='./js/editor_blog_everyday.js'></script>
+</body>
+</html>

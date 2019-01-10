@@ -1,0 +1,19 @@
+.blog{
+    background-color: white;
+    text-align: left;
+    width: 100%;
+    border-radius: 6px;
+    box-sizing: border-box;
+    box-shadow: 3px 4px 3px #888;
+    margin-top: 25px;
+    min-height: 450px;
+    padding: 20px;
+}
+.blog-head a{color: #337ab7}
+.blog-head{
+    padding-bottom: 20px;
+    border-bottom: 1px solid #b9b9b9;
+}
+.blog-content{
+    padding-top: 20px 0;
+}

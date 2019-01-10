@@ -1,0 +1,12 @@
+.content{
+    min-height: 790px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #191919;
+}
+.content ul li a{
+    display: inline-block;
+    padding: 10px 0;
+    color: #191919;
+}

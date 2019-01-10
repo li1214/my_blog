@@ -1,0 +1,24 @@
+{
+  "name": "my_blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/li1214/my_blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/li1214/my_blog/issues"
+  },
+  "homepage": "https://github.com/li1214/my_blog#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "install": "^0.12.2",
+    "npm": "^6.5.0"
+  }
+}

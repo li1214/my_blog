@@ -1,0 +1,18 @@
+.content{
+    min-height: 790px;
+    border: 1px solid #191919;
+    border-radius: 6px;
+    font-size: 14px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 20px 0;
+}
+.content ul li{
+   list-style-type: disc;
+    color: #191919;
+}
+.content ul li a{
+    display: inline-block;
+    padding: 10px 0;
+    color: #191919;
+}
