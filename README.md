@@ -2,4 +2,6 @@
 
 #### npm install
 
-###4 node index.js
+#### 数据库配置路径 ./dao/DBUtil.js
+
+#### node index.js
