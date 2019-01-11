@@ -13,7 +13,7 @@ function editorBlog(request, response) {
     var tags = params.tags.replace(/，/g, ",").replace(/ /g,'');
     var title = params.title;
     request.on('data',(data) => {
-    var text = decodeURIComponent(data.toString()).trim().replace(/\+/g, '').split(/text\=/)[1];
+    var text = decodeURIComponent(data.toString()).replace(/\+/g, '').split(/text\=/)[1];
         blogDao.insertBlog(title, text, 0,tags,timeUtile.getNow(),null,function(result){
             response.writeHead(200, {
               "Content-Type": "text/html;charset:utf-8"
