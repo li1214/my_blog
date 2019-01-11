@@ -90,19 +90,19 @@ var randomTags = new Vue({
   }
 });
 
-var search = new Vue({
-  el:'#search',
-  data () {
-    return {
-      show:false,
-      list:[],
-      keywords:''
-    }
-  },
-  methods:{
-    getList () {
-      axios.get('/')
-    }
-  }
-})
+// var search = new Vue({
+//   el:'#search',
+//   data () {
+//     return {
+//       show:false,
+//       list:[],
+//       keywords:''
+//     }
+//   },
+//   methods:{
+//     getList () {
+//       axios.get('/')
+//     }
+//   }
+// })
 

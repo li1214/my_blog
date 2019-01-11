@@ -19,7 +19,7 @@ var blogList = new Vue({
   data() {
     return {
       page: 1,
-      pagesize: 2,
+      pagesize: 5,
       pages: [],
       count: null,
       list: [],
