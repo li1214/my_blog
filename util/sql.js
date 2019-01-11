@@ -12,4 +12,5 @@ function operSql (commond,params,callback) {
     })
     q.end();
 }
+
 module.exports.operSql = operSql;

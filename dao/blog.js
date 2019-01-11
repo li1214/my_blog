@@ -37,6 +37,16 @@ function selectBlogCount (success){
     czSql.operSql(selectSql, params, success);
 }
 
+function selectBlogByKeywords (k,s,c) {
+    var selectSql = (k == undefined || k == '') ? "select * from blog order by views desc limit ?;" : "select * from blog where title or tags  like '%" + k +"%' limt ?";
+    // var params = (k == undefined || k == '') ? [parseInt(s)] : ["REGEXP '." + k +".",parseInt(s)] ;
+    var params =[parseInt(s)];
+    console.log(selectSql);
+   czSql.operSql(selectSql, params, c);
+}
+
+
+module.exports.selectBlogByKeywords = selectBlogByKeywords;
 module.exports.selectBlogCount = selectBlogCount;
 module.exports.selectAllBlog = selectAllBlog;
 module.exports.selectBlogById = selectBlogById;

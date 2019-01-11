@@ -1,7 +1,8 @@
 var url = require('url');
 var timeUtile = require("../util/ctime");
 var writeRes = require("../util/response");
-var commentDao = require('../dao/comment')
+var commentDao = require('../dao/comment');
+var captcha = require("svg-captcha");
 
 var path = new Map();
 
@@ -14,7 +15,7 @@ function addComment (request,response)  {
     var email = params.email;
 
     request.on('data',(data) => {
-        var text = decodeURIComponent(data.toString()).trim().replace(/\+/g, '').split(/text\=/)[1];
+        var text = JSON.parse(decodeURIComponent(data.toString())).text;
         commentDao.insertComment(blogid,parent,parentName,username,email,text,timeUtile.getNow(),null,(res => {
             response.writeHead(200, {
                 "Content-Type": "text/html;charset:utf-8"
@@ -77,4 +78,15 @@ function selectCountByBlogId (request,response) {
 }
 
 path.set("/selectCountByBlogId", selectCountByBlogId);
+
+function createCode (request,response) {
+    var code = captcha.create({fontSize:50,width:100,height:45});
+    response.writeHead(200, {
+        "Content-Type": "text/html;charset:utf-8"
+    });
+    response.write(writeRes.writeRes("200", "返回验证码！", code));
+    response.end();
+}
+
+path.set("/createCode", createCode);
 module.exports.path = path;

@@ -17,10 +17,10 @@
         <div class="container">
             <a>个人博客 | 技术博客</a>
             <ul>
-                <li><a href="">首页</a></li>
-                <li><a href="">地图</a></li>
-                <li><a href="">关于</a></li>
-                <li><a href="">留言</a></li>
+                <li><a href="./index.html">首页</a></li>
+                <li><a href="./map.html">地图</a></li>
+                <li><a href="./about.html">关于</a></li>
+                <li><a href="./liuyan.html">留言</a></li>
             </ul>
             <div class="search">
                 <input type="text" placeholder="输入关键字查找" />
@@ -29,7 +29,7 @@
         </div>
     </header>
     <div class="content">
-        <div class="content-left">
+        <div class="content-left" id='about'>
             <div class='about'>
                 <div class='about-me'>
                     <h4>关于我</h4>
@@ -42,7 +42,7 @@
                 </div>
                 <div class='about-blog'>
                     <h4>关于博客</h4>
-                    <p>从2009年 – 今
+                    <p style='line-height: 25px;'>从2009年 – 今
                     博主很懒加词穷，佛系更新…
                     域名 zhengoo.cn -> zh30.com
                     程序 tcms -> WordPress
@@ -52,40 +52,31 @@
                     kvm vps:hostEONS 洛杉矶节点，我在用，速度可以，可以干一些羞羞的事。</p>
                 </div>
             </div>
-            <div class='liuyan'>
-                <span>关于：目前有61 条留言</span>
-                <div class='liuyan-item'>
-                    <span><b>cjh333</b>：发表于 2018年06月26日 12:37[回复]</span>
-                    <p>wordpress是后台管理框架吧？</p>
-                </div>
-                <div class='liuyan-item'>
-                    <span><b>cjh333</b>：发表于 2018年06月26日 12:37[回复]</span>
-                    <p>wordpress是后台管理框架吧？</p>
-                </div>
-                <div class='liuyan-item'>
-                    <span><b>cjh333</b>：发表于 2018年06月26日 12:37[回复]</span>
-                    <p>wordpress是后台管理框架吧？</p>
-                </div>
-                <div class='liuyan-item'>
-                    <span><b>cjh333</b>：发表于 2018年06月26日 12:37[回复]</span>
-                    <p>wordpress是后台管理框架吧？</p>
+            <div class="liuyan">
+                <span>留言：目前{{commentsCount}} </span>
+                <div class="liuyan-item" v-for='item in commentsList'>
+                    <span><b>{{item.nickname}}</b>：发表于 {{item.ctime | toDate}}[ <span class='reply' @click='replay(item.id,item.username)'>回复</span>
+                        ]</span>
+                    <p>{{item.text}}</p>
                 </div>
             </div>
-            <div class='subly'>
+            <div class="subly" id='subly'>
                 <form action="">
                     <span>发表评论:</span>
                     <div>
-                        <input type="text" placeholder="昵称">
-                        <input type="email" placeholder="邮箱(评论回复时你能收到通知)" style="width:300px;margin-left: 30px;">
+                        <input type="text" ref="username" placeholder="昵称" v-model="comments.nickname" />
+                        <input type="email" placeholder="邮箱(评论回复时你能收到通知)" type="email" v-model="comments.email" style="width:300px;margin-left: 30px;" />
                     </div>
-                    <textarea placeholder="无意义的内容我可能不会回复你"></textarea>
+                    <textarea placeholder="无意义的内容我可能不会回复你" type="text" v-model="comments.text"></textarea>
                     <div>
-                        <input type="text" placeholder="验证码">
-                        <img class='codeimg' style='margin-left:30px'>
+                        <input type="text" placeholder="验证码" v-model="comments.code" />
+                        <div v-html='comments.coder' @click='getCode()' style="display:inline-block;position: relative;top: 7px;cursor: pointer;"></div>
                     </div>
                     <div>
-                        <button class='submit'>提交</button>
-                        <button class='reset'>重写</button>
+                        <button class="submit" @click.prevent="submitVer(&quot;0&quot;)">
+                            提交
+                        </button>
+                        <button class="reset" @click.prevent="reset">重写</button>
                     </div>
                 </form>
             </div>
@@ -94,12 +85,11 @@
             <div class="right-box">
                 <h4 :style='{color:color}'>随机标签云</h4>
                 <div class="contents">
-                    <a v-for='tag in tags' v-bind:style='{color:randomColor(),fontSize:randomSize()}'>{{tag.tag}}</a>
+                    <a v-for='tag in tags' :href='tag.link' v-bind:style='{color:randomColor(),fontSize:randomSize()}'>{{tag.tag}}</a>
                 </div>
             </div>
             <div class="right-box" style="padding-bottom: 0;">
                 <h4 :style='{color:color}'>最近热门</h4>
-                {{msg}}
                 <div class="contents">
                     <ul class="list-group">
                         <li class="list-group-item" v-for='item in hots' :key='item.id'>
@@ -113,9 +103,11 @@
                 <h4 :style='{color:color}'>最新评论</h4>
                 <div class="contents">
                     <div class='item' v-for='item in comments'>
-                        <div class='item-title'>
-                            <span>{{item.name}}</span>
-                            <span class='spanr'>[{{item.date}}]</span>
+                        <div class='item-title' >
+                            <a :href='item.link'>
+                                <span>{{item.username}}</span>
+                                <span class='spanr'>[{{item.ctime | toDate}}]</span>
+                            </a>
                         </div>
                         <p class='item-comtebt'>
                             {{item.text}}
@@ -142,6 +134,7 @@
         <p>Copyright © 2010-2017 郑晓个人博客 All rights reserved. 由免费开源的WordPress强力驱动. 鲁ICP备14017955号站长统计</p>
     </footer>
     <script src='./js/base.js'></script>
+    <script src='./js/about.js'></script>
 </body>
 
 </html>

@@ -16,10 +16,10 @@
       <div class="container">
         <a>个人博客 | 技术博客</a>
         <ul>
-          <li><a href="">首页</a></li>
-          <li><a href="">地图</a></li>
-          <li><a href="">关于</a></li>
-          <li><a href="">留言</a></li>
+          <li><a href="./index.html">首页</a></li>
+          <li><a href="./map.html">地图</a></li>
+          <li><a href="./about.html">关于</a></li>
+          <li><a href="./liuyan.html">留言</a></li>
         </ul>
         <div class="search">
           <input type="text" placeholder="输入关键字查找" />
@@ -28,8 +28,8 @@
       </div>
     </header>
     <div class="content">
-      <div class="content-left">
-        <div id="blog">
+      <div class="content-left" id="blog">
+        <div>
           <div class="blog">
             <div class="blog-head">
               <div>
@@ -40,30 +40,25 @@
               </div>
               <h3 class="blog-title">{{ blog.title }}</h3>
               <div>
-                作者：李恭兆 发布于 <span>{{ blog.ctime }}</span> 浏览({{
+                作者：李恭兆 发布于 <span>{{ blog.ctime | toDate}}</span> 浏览({{
                   blog.views
-                }}) <span>评论</span>
+                }})
               </div>
             </div>
             <div class="blog-content" v-html="blog.content"></div>
           </div>
           <div class="liuyan">
-            <span>{{blog.title}}：目前有61 条留言</span>
-            <div class="liuyan-item">
-              <span><b>cjh333</b>：发表于 2018年06月26日 12:37[ <span class='reply'>回复</span> ]</span>
-              <p>wordpress是后台管理框架吧？</p>
-            </div>
-            <div class="liuyan-item">
-              <span><b>cjh333</b>：发表于 2018年06月26日 12:37[回复]</span>
-              <p>wordpress是后台管理框架吧？</p>
-            </div>
-            <div class="liuyan-item">
-              <span><b>cjh333</b>：发表于 2018年06月26日 12:37[回复]</span>
-              <p>wordpress是后台管理框架吧？</p>
-            </div>
-            <div class="liuyan-item">
-              <span><b>cjh333</b>：发表于 2018年06月26日 12:37[<span>回复</span>]</span>
-              <p>wordpress是后台管理框架吧？</p>
+            <span>{{ blog.title }}：目前{{ commentsCount }} </span>
+            <div class="liuyan-item" v-for="item in commentsList">
+              <span
+                ><b>{{ item.nickname }}</b
+                >：发表于 {{ item.ctime | toDate }}[
+                <span class="reply" @click="replay(item.id,item.username)"
+                  >回复</span
+                >
+                ]</span
+              >
+              <p>{{ item.text }}</p>
             </div>
           </div>
         </div>
@@ -71,21 +66,32 @@
           <form action="">
             <span>发表评论:</span>
             <div>
-              <input type="text" placeholder="昵称" v-model="nickname" />
+              <input
+                type="text"
+                ref="username"
+                placeholder="昵称"
+                v-model="comments.nickname"
+              />
               <input
                 type="email"
                 placeholder="邮箱(评论回复时你能收到通知)"
-                v-model="email"
+                type="email"
+                v-model="comments.email"
                 style="width:300px;margin-left: 30px;"
               />
             </div>
             <textarea
               placeholder="无意义的内容我可能不会回复你"
-              v-model="text"
+              type="text"
+              v-model="comments.text"
             ></textarea>
             <div>
-              <input type="text" placeholder="验证码" v-model="code" />
-              <img class="codeimg" style="margin-left:30px" />
+              <input type="text" placeholder="验证码" v-model="comments.code" />
+              <div
+                v-html="comments.coder"
+                @click="getCode()"
+                style="display:inline-block;position: relative;top: 7px;cursor: pointer;"
+              ></div>
             </div>
             <div>
               <button class="submit" @click.prevent="submitVer(&quot;0&quot;)">
@@ -109,7 +115,6 @@
         </div>
         <div class="right-box" style="padding-bottom: 0;">
           <h4 :style="{color:color}">最近热门</h4>
-          {{ msg }}
           <div class="contents">
             <ul class="list-group">
               <li class="list-group-item" v-for="item in hots" :key="item.id">
@@ -123,8 +128,10 @@
           <div class="contents">
             <div class="item" v-for="item in comments">
               <div class="item-title">
-                <span>{{ item.name }}</span>
-                <span class="spanr">[{{ item.date }}]</span>
+                <a :href="item.link">
+                  <span>{{ item.username }}</span>
+                  <span class="spanr">[{{ item.ctime | toDate }}]</span>
+                </a>
               </div>
               <p class="item-comtebt">{{ item.text }}</p>
             </div>

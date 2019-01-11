@@ -36,16 +36,21 @@ function  getBlog(request,response) {
     var page = params.page;
     var pagesize = params.pagesize;
     blogDao.selectBlog(page,pagesize,(result) => {
-       result.forEach(element => {
-           element.content = element.content.replace(/<img[\w\W]*">/, "");
-           element.content = element.content.replace(/<[\w\W]{1,5}>/g, "");
-           element.content = element.content.substring(0, 300);
-       });
-        response.writeHead(200, {
+        blogDao.selectBlogCount(res => {
+          result.forEach(element => {
+            element.content = element.content.replace(/<img[\w\W]*">/, "");
+            element.content = element.content.replace(/<[\w\W]{1,5}>/g, "");
+            element.content = element.content.substring(0, 300);
+          });
+          var data = {};
+          data.data = result;
+          data.count = res[0].count;
+          response.writeHead(200, {
             "Content-Type": "text/html;charset:utf-8"
+          });
+          response.write(writeRes.writeRes("success", "查询成功！", data));
+          response.end();
         });
-        response.write(writeRes.writeRes("success", "查询成功！", result));
-        response.end();
     })
 }
 //返回最热门的5篇博客
@@ -91,7 +96,19 @@ function getBlogCount (resquest,response) {
         response.end();
     })
 }
+//搜索接口
+function getBlogByKeywords (request,response ) {
+    var params = url.parse(request.url,true).query;
+    blogDao.selectBlogByKeywords(params.keywords,params.size,res => {
+        response.writeHead(200, {
+            "Content-Type": "text/html;charset:utf-8"
+        });
+        response.write(writeRes.writeRes("200", "查询成功！！！", res));
+        response.end();
+    })
+}
 
+path.set("/getBlogByKeywords", getBlogByKeywords);
 path.set("/getBlogCount", getBlogCount);
 path.set("/getAllBlog", getAllBlog);
 path.set("/getBlogById", getBlogById);

@@ -4,50 +4,7 @@ var randomTags = new Vue({
     return {
       tags: [],
       hots: [],
-      comments: [
-        {
-          id: 1,
-          name: "代码狗",
-          text: "抱歉，由于种种原因，本站不再链接至贵",
-          date: "一周前"
-        },
-        {
-          id: 2,
-          name: "代码狗",
-          text: "抱歉，由于种种原因，本站不再链接至贵",
-          date: "一周前"
-        },
-        {
-          id: 3,
-          name: "代码狗",
-          text: "抱歉，由于种种原因，本站不再链接至贵",
-          date: "一周前"
-        },
-        {
-          id: 4,
-          name: "代码狗",
-          text: "抱歉，由于种种原因，本站不再链接至贵",
-          date: "一周前"
-        },
-        {
-          id: 5,
-          name: "代码狗",
-          text: "抱歉，由于种种原因，本站不再链接至贵",
-          date: "一周前"
-        },
-        {
-          id: 6,
-          name: "代码狗",
-          text: "抱歉，由于种种原因，本站不再链接至贵",
-          date: "一周前"
-        },
-        {
-          id: 7,
-          name: "代码狗",
-          text: "抱歉，由于种种原因，本站不再链接至贵",
-          date: "一周前"
-        }
-      ],
+      comments: [],
       c_a: 0,
       color: "rgb(0,255,255)",
       timer: null
@@ -56,6 +13,7 @@ var randomTags = new Vue({
   created() {
     this.getHots();
     this.getTags();
+    this.getNewsComments();
   },
   computed: {
     randomColor() {
@@ -63,7 +21,6 @@ var randomTags = new Vue({
         var red = Math.random() * 255 + 50;
         var green = Math.random() * 255 + 50;
         var blue = Math.random() * 255 + 50;
-        var a = Math.random();
         return "rgba(" + red + " ," + green + "," + blue + ")";
       };
     },
@@ -74,21 +31,25 @@ var randomTags = new Vue({
     }
   },
   methods: {
-    getHots () {
+    getHots() {
       axios.get("/getHotBlog").then(res => {
         if (res.status == 200) {
           var data = res.data.data;
           for (var i in data) {
-            data[i]['link'] = './blog.html?id=' + data[i]['id']
+            data[i]["link"] = "./blog.html?id=" + data[i]["id"];
           }
           this.hots = data;
         }
       });
     },
-    getTags () {
+    getTags() {
       axios.get("/selectRandomTag").then(res => {
         if (res.status == 200) {
-          this.tags = res.data.data
+          var data = res.data.data;
+          for(var i in data){
+            data[i].link = '../index.html?tagid=' + data[i].id;
+          }
+          this.tags = data;
         }
       });
     },
@@ -98,66 +59,50 @@ var randomTags = new Vue({
         this.c_a = 0;
       }
       this.color = `rgba(${this.c_a},255,255)`;
+    },
+    getNewsComments () {
+      axios.get("/selectNewComments").then(res => {
+        if(res.status == 200){
+          var data = res.data.data;
+          for(var i in data){
+            if (data[i]['blog_id'] == -2){
+              data[i]['link'] = '../liuyan.html'
+            } else if (data[i]['blog_id'] == -1){
+              data[i]['link'] = '../about.html'
+            }else{
+              data[i]["link"] = "../about.html?id=" + data[i]["blog_id"];
+            }
+          } 
+          this.comments = data;
+        }
+      });
+    }
+  },
+  filters: {
+    toDate(d) {
+      var date = new Date(d * 1000);
+      var Y, M, D;
+      Y = date.getFullYear();
+      M = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : "0" + (date.getMonth() + 1);
+      D = date.getDate();
+      return Y + '-' + M + '-' + D
     }
   }
 });
 
-var subly = new Vue({
-  el: "#subly",
-  data() {
+var search = new Vue({
+  el:'#search',
+  data () {
     return {
-      nickname: "",
-      email: "",
-      text: "",
-      code: "",
-      parentId: '', 
-      parentName:''
-    };
+      show:false,
+      list:[],
+      keywords:''
+    }
   },
-  methods: {
-    submit(i) {
-      var id = i == '0' ? this.getBlogId() : i ;
-      this.
-      axios
-        .post("/addComment?blogid=" + id + "&username=" + this.nickname +'&email=' + this.email + '&parant=' + this.parentId + "&parentName=" +this.parentName , {
-          text: this.text
-        })
-        .then(res => {
-          if (res.status == 200) {
-          }
-        });
-    },
-    reset() {
-      this.nickname = "";
-      this.email = "";
-      this.text = "";
-      this.code = "";
-    },
-    submitVer(i) {
-      if (this.text == "") {
-        alert("请正确填写！~");
-        return false;
-      }
-      axios.get().then(res => {
-        if (res.status == 200) {
-          this.submit(i);
-        } else {
-          alert("验证码错误！！");
-          return;
-        }
-      });
-    },
-    getBlogId () {
-      var url = window.location.search.replace("?", "");
-      var arr = url.split("&");
-      var id = "";
-      arr.forEach(item => {
-        var [key, value] = item.split("=");
-        if (key == "id") {
-          this.blogid = value;
-        }
-      });
-      return id;
+  methods:{
+    getList () {
+      axios.get('/')
     }
   }
-});
+})
+

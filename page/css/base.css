@@ -225,6 +225,26 @@ header .container .search > button{
     background-color: white;
     border: none;
 }
+header .searchlist{
+    position: absolute;
+    background-color: #f1f1f1;
+    width: 247px;
+    left: -172px;
+    top: 34px;
+    z-index: 2;
+    border-radius: 6px;
+    display: inline-block;
+    display: none;
+}
+header .searchlist li {
+  list-style: none;
+}
+header .searchlist li a{
+  display: inline-block;
+  cursor: pointer;
+  color: #1f1f1f;
+  padding: 5px 10px;
+}
 /* ============================================================== header end ===================================================================== */
 .content {
     width: 1170px;
@@ -262,6 +282,7 @@ header .container .search > button{
     color: #eee;
     padding: 0 10px 0px 10px;
 }
+.right-box .contents a{cursor: pointer;}
 /* .right-box .contents a::after{
     display: block;
     content: '';
@@ -290,6 +311,7 @@ header .container .search > button{
 .right-box .contents li a:hover{
   color: #337ab7;
 }
+.right-box .item a{color: #fff;}
 .right-box .item .item-title{position: relative;}
 .right-box .item .item-title span{display: inline-block;font-size: 14px;font-weight: normal;}
 .right-box .item .item-title span.spanr{
@@ -308,6 +330,7 @@ footer{
     background: #191919;
     text-align: center;
     padding: 20px;
+    margin-top: 20px;
 }
 footer ul{
     display: inline-block;
@@ -396,3 +419,21 @@ footer p {
     color: #31708f;
 }
 .reply{cursor: pointer;}
+.page ul li{
+    list-style: none;
+    display: inline-block;
+    background: #494d50;
+    color: #fff;
+    border-radius: 3px;
+    width: 30px;
+    padding: 5px;
+    cursor: pointer;
+    transition: background 0.5s;
+    margin-left: 5px;
+}
+.curr{background: #1f1f1f!important;}
+.page ul li:hover{background: #1f1f1f}
+.page{
+    margin-top: 20px;
+    text-align: center;
+}
