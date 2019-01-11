@@ -46,8 +46,8 @@ var randomTags = new Vue({
       axios.get("/selectRandomTag").then(res => {
         if (res.status == 200) {
           var data = res.data.data;
-          for(var i in data){
-            data[i].link = '../index.html?tagid=' + data[i].id;
+          for (var i in data) {
+            data[i].link = "../index.html?tagid=" + data[i].id;
           }
           this.tags = data;
         }
@@ -60,22 +60,25 @@ var randomTags = new Vue({
       }
       this.color = `rgba(${this.c_a},255,255)`;
     },
-    getNewsComments () {
+    getNewsComments() {
       axios.get("/selectNewComments").then(res => {
-        if(res.status == 200){
+        if (res.status == 200) {
           var data = res.data.data;
-          for(var i in data){
-            if (data[i]['blog_id'] == -2){
-              data[i]['link'] = '../liuyan.html'
-            } else if (data[i]['blog_id'] == -1){
-              data[i]['link'] = '../about.html'
-            }else{
+          for (var i in data) {
+            if (data[i]["blog_id"] == -2) {
+              data[i]["link"] = "../liuyan.html";
+            } else if (data[i]["blog_id"] == -1) {
+              data[i]["link"] = "../about.html";
+            } else {
               data[i]["link"] = "../about.html?id=" + data[i]["blog_id"];
             }
-          } 
+          }
           this.comments = data;
         }
       });
+    },
+    toIndex (tag) {
+      location.href = '../index.html?tag =' + tag;
     }
   },
   filters: {
@@ -83,9 +86,12 @@ var randomTags = new Vue({
       var date = new Date(d * 1000);
       var Y, M, D;
       Y = date.getFullYear();
-      M = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : "0" + (date.getMonth() + 1);
+      M =
+        date.getMonth() + 1 > 9
+          ? date.getMonth() + 1
+          : "0" + (date.getMonth() + 1);
       D = date.getDate();
-      return Y + '-' + M + '-' + D
+      return Y + "-" + M + "-" + D;
     }
   }
 });
