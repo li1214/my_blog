@@ -9,26 +9,22 @@ var tag_blog_mappingDao = require('../dao/tag_blog_mappingDao');
 var path = new Map();
 
 function editorBlog(request, response) {
-    var params = url.parse(decodeURIComponent(request.url), true).query;
-    var tags = params.tags.replace(/，/g, ",").replace(/ /g,'');
-    var title = params.title;
-    request.on('data',(data) => {
-    var text = decodeURIComponent(data.toString()).replace(/\+/g, '').split(/text\=/)[1];
-        blogDao.insertBlog(title, text, 0,tags,timeUtile.getNow(),null,function(result){
-            response.writeHead(200, {
-              "Content-Type": "text/html;charset:utf-8"
-            });
-            response.write(writeRes.writeRes("success", "插入成功！", null));
-            response.end();
-            //插入到标签表 插入之前需要先搜索是否已经存在
-            var blogid = result.insertId;
-            var tagsList = [];
-            tagsList = tags.split(',');
-            tagsList.forEach(item => {
-                selectTag(item, blogid);
-            })
+    var d = request.body;
+    blogDao.insertBlog(d.title, d.text, 0, d.tags, timeUtile.getNow(), null, function (result) {
+        response.writeHead(200, {
+            "Content-Type": "text/html;charset:utf-8"
+        });
+        response.write(writeRes.writeRes("success", "插入成功！", null));
+        response.end();
+        //插入到标签表 插入之前需要先搜索是否已经存在
+        var blogid = result.insertId;
+        var tagsList = [];
+        tagsList = tags.split(',');
+        tagsList.forEach(item => {
+            selectTag(item, blogid);
         })
     })
+    
 }
 //根据分页来查博客
 function  getBlog(request,response) {

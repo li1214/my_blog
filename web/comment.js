@@ -7,23 +7,14 @@ var captcha = require("svg-captcha");
 var path = new Map();
 
 function addComment (request,response)  {
-    var params = url.parse(request.url,true).query;
-    var blogid = params.blogid;
-    var parent = params.parent;
-    var parentName = params.parentName;
-    var username = params.username;
-    var email = params.email;
-
-    request.on('data',(data) => {
-        var text = JSON.parse(decodeURIComponent(data.toString())).text;
-        commentDao.insertComment(blogid,parent,parentName,username,email,text,timeUtile.getNow(),null,(res => {
-            response.writeHead(200, {
-                "Content-Type": "text/html;charset:utf-8"
-            });
-            response.write(writeRes.writeRes("200", "插入成功！", null));
-            response.end();
-        }));
-    })
+    var d = request.body
+    commentDao.insertComment(d.blogid, d.parent, d.parentName, d.username, d.email, d.text, timeUtile.getNow(), null, (res => {
+        response.writeHead(200, {
+            "Content-Type": "text/html;charset:utf-8"
+        });
+        response.write(writeRes.writeRes("200", "插入成功！", null));
+        response.end();
+    }));
 }
 
 path.set("/addComment", addComment);

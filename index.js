@@ -1,16 +1,23 @@
 const express = require('express');
 var globalConfig = require('./config');
-var loader = require('./loader')
+var loader = require('./loader');
+var multer = require("multer");
+var bodyParser = require("body-parser");
 
+var uploadImg = multer({ dest: "./upload" });
 const app = new express();
+
+
+app.use(bodyParser.json());
+
 app.all('*', function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", '*');
 	res.header('Access-Control-Allow-Credentials', true);//告诉客户端可以在HTTP请求中带上Cookie
-	res.header("Access-Control-Allow-Headers", "Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, " +
-	    "Last-Modified, Cache-Control, Expires, Content-Type, Content-Language, Cache-Control, X-E4M-With,X_FILENAME");
-	res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-	res.header("X-Powered-By",' 3.2.1')
-	res.header("Content-Type", "application/json;charset=utf-8");
+	// res.header("Access-Control-Allow-Headers", "Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, " +
+	//     "Last-Modified, Cache-Control, Expires, Content-Type, Content-Language, Cache-Control, X-E4M-With,X_FILENAME");
+	// res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+	// res.header("X-Powered-By",' 3.2.1')
+	// res.header("Content-Type", "application/json;charset=utf-8");
 	next();
 })
 
@@ -38,7 +45,16 @@ app.get("/selectNewComments", loader.get('/selectNewComments'));
 app.get("/selcetByBlogId", loader.get('/selcetByBlogId'));
 app.get('/selectById', loader.get('/selectById'));
 app.get("/selectCountByBlogId", loader.get('/selectCountByBlogId'));
-app.get("/createCode", loader.get('/createCode'));
+app.get("/createCode", loader.get("/createCode"));
+
+//上传文件
+app.post('/upload', uploadImg.single("image"), (req, res, next) => {
+	var file = req.file;
+	var path = file.path + '.' +file.originalname.split(".")[1];
+	res.writeHead(200, { "Content-Type": "text/html;charset:utf-8" });
+	res.write(JSON.stringify({ status: 200, msg: null, data: path }));
+	res.end();
+});
 
 app.listen(globalConfig.port, () => {
   console.log("It is Ok");

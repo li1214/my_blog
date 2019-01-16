@@ -1,8 +1,8 @@
 var czSql = require('../util/sql');
 
-function insertEveryday(content, ctime,success){
-    var insertSql = "insert into every_day (`content`, `ctime`) values (?, ?)";
-    var params =[content,ctime];
+function insertEveryday(ctext,etext,author, ctime,success){
+  var insertSql = "insert into every_day (`ctext`, `etext`,`author`,`ctime`) values (?,?,?,?)";
+  var params = [ctext, etext,author,ctime];
     czSql.operSql(insertSql, params, success)
 }
 function selectEveryday(success) {

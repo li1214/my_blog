@@ -6,19 +6,14 @@ var path = new Map();
 
 
 function editorEveryday(request,response) {
-    request.on('data',(data) =>{
-        var text = decodeURIComponent(data
-            .toString()
-            .split("=")[1]
-            .trim()).replace(/\+/g,'');
-        everydayDao.insertEveryday(text, timeUtile.getNow(),function(result){
-            response.writeHead(200, {
-                'Content-Type': 'text/html;charset:utf-8'
-            });
-            response.write(writeRes.writeRes("success", "插入成功！", null));
-            response.end();
+    var data = request.body;
+    everydayDao.insertEveryday(data.ctext,data.etext,data.author, timeUtile.getNow(), function (result) {
+        response.writeHead(200, {
+            'Content-Type': 'text/html;charset:utf-8'
         });
-    })
+        response.write(writeRes.writeRes("success", "插入成功！", null));
+        response.end();
+    });
 }
 
 function getEveryday (request,response) {

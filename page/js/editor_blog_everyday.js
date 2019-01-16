@@ -57,11 +57,24 @@ $(function() {
       alert("请输入每日一句内容！");
       return;
     }
-    $.post("/editorEveryday", { text: everydayContent }).then(res => {
-      var res = JSON.parse(res)
-      if (res.status == "success") {
-        alert("添加成功！");
+    var data = JSON.stringify({ text: everydayContent, page: 123, ctext: '撒娇的卡萨', etext: 'hello world' })
+    $.ajax({
+      type: "post",
+      url: "/editorEveryday",
+      dataType: "json",
+      data: data,
+      headers: { 'Access-Control-Allow-Origin': '*', "Content-Type": "application/json;charset=UTF-8"},
+      success:function(res){
+        if (res.status == "success") {
+          alert("添加成功！");
+        }
       }
     });
+    // $.post("/editorEveryday", { text: everydayContent ,page:123,ctext:'撒娇的卡萨',etext:'hello world'}).then(res => {
+    //   var res = JSON.parse(res)
+    //   if (res.status == "success") {
+    //     alert("添加成功！");
+    //   }
+    // });
   }
 });
