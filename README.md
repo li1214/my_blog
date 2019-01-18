@@ -1,6 +1,6 @@
 # 个人博客
 
-### 技术栈： vue element-ui axios vur-router jquery bootstrap node express mysql 
+### 技术栈： vue element-ui axios vue-router jquery bootstrap node express mysql 
 
 ### npm install
 
