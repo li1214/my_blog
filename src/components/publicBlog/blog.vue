@@ -64,7 +64,7 @@ export default {
                 headers: { 'Access-Control-Allow-Origin': '*', "Content-Type": "application/json;charset=UTF-8" },
             }).then(res => {
                 if(res.status == 200){
-                    this.$alert(res.msg);
+                    this.$alert(res.data.msg);
                 }
             }).catch(e => {console.log(e)})
             

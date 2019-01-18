@@ -3,7 +3,7 @@
         <router-link :to='blog.link' tag='a'>
             <h3>{{blog.title}}</h3>
         </router-link>
-        <p v-html='blog.content'></p>
+        <p v-html='blog.content' class='blog-item'></p>
         <div class="blog-foot">
             <template>发布于 {{blog.ctime | toDate}} | 浏览({{blog.views}}) | Tags：{{blog.tags | tagfliter}}</template>
         </div>
@@ -19,7 +19,7 @@
         }
     }
 </script>
-<style scoped>
+<style>
     .blog-list .blog {
         width: 100%;
         border: 1px solid #333;
