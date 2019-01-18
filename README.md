@@ -8,11 +8,11 @@
 
 ### node index.js
 
-### 前端部分分俩快 
+### 前端部分分俩块
 
-### 一块使用vue渐进式开发 目录 page/
+### 1.vue开发的多页blog 目录 page/
 
-### 另一块使用vue全家桶开发 目录 /src 编译后目录 /dist
+### 2.vue全家桶开发单页blog 目录 /src 编译后目录 /dist
 
 
 
