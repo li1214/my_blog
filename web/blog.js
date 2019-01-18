@@ -10,11 +10,12 @@ var path = new Map();
 
 function editorBlog(request, response) {
     var d = request.body;
+    var tags = d.tags
     blogDao.insertBlog(d.title, d.text, 0, d.tags, timeUtile.getNow(), null, function (result) {
         response.writeHead(200, {
             "Content-Type": "text/html;charset:utf-8"
         });
-        response.write(writeRes.writeRes("success", "插入成功！", null));
+        response.write(writeRes.writeRes("200", "发布成功！", null));
         response.end();
         //插入到标签表 插入之前需要先搜索是否已经存在
         var blogid = result.insertId;
@@ -44,7 +45,7 @@ function  getBlog(request,response) {
           response.writeHead(200, {
             "Content-Type": "text/html;charset:utf-8"
           });
-          response.write(writeRes.writeRes("success", "查询成功！", data));
+          response.write(writeRes.writeRes("200", "查询成功！", data));
           response.end();
         });
     })

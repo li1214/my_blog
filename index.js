@@ -3,8 +3,10 @@ var globalConfig = require('./config');
 var loader = require('./loader');
 var multer = require("multer");
 var bodyParser = require("body-parser");
+var timeUtile = require("./util/ctime");
+var uploadDao = require('./dao/upload');
 
-var uploadImg = multer({ dest: "./upload" });
+var uploadImg = multer({ dest: "./dist/upload" });
 const app = new express();
 
 
@@ -50,11 +52,22 @@ app.get("/createCode", loader.get("/createCode"));
 //上传文件
 app.post('/upload', uploadImg.single("image"), (req, res, next) => {
 	var file = req.file;
-	var path = file.path + '.' +file.originalname.split(".")[1];
-	res.writeHead(200, { "Content-Type": "text/html;charset:utf-8" });
-	res.write(JSON.stringify({ status: 200, msg: null, data: path }));
-	res.end();
+	var path = file.path.slice(5); //删除 dist\ 或 page\
+	// var path = file.path.replace('dist\\', ''); 
+	var type = file.originalname.split(".")[1];
+	uploadDao.insertUpload(path, type, timeUtile.getNow(),result => {
+		res.writeHead(200, { "Content-Type": "text/html;charset:utf-8" });
+		res.write(JSON.stringify({ status: 200, msg: null, data: path + '.' + type }));
+		res.end();
+	});
 });
+app.get('/selectImg',(request,response) => {
+	uploadDao.selectImg(res => {
+		response.writeHead(200, { "Content-Type": "text/html;charset:utf-8" });
+		response.write(JSON.stringify({ status: 200, msg: null, data: res }));
+		response.end();
+	});
+})
 
 app.listen(globalConfig.port, () => {
   console.log("It is Ok");

@@ -57,7 +57,7 @@ $(function() {
       alert("请输入每日一句内容！");
       return;
     }
-    var data = JSON.stringify({ text: everydayContent, page: 123, ctext: '撒娇的卡萨', etext: 'hello world' })
+    var data = JSON.stringify({ ctext: everydayContent ,etext:'shdajkhdskjhdkjsa',author:'啥都看见'});
     $.ajax({
       type: "post",
       url: "/editorEveryday",
