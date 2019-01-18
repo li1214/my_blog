@@ -36,8 +36,8 @@ function  getBlog(request,response) {
         blogDao.selectBlogCount(res => {
           result.forEach(element => {
             element.content = element.content.replace(/<img[\w\W]*">/, "");
-            element.content = element.content.replace(/<[\w\W]{1,5}>/g, "");
-            element.content = element.content.substring(0, 300);
+              element.content = element.content.replace(/<[^>]+>/g, "");
+            element.content = element.content.substring(0, 250);
           });
           var data = {};
           data.data = result;
