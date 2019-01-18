@@ -11,7 +11,7 @@ var path = new Map();
 function editorBlog(request, response) {
     var d = request.body;
     var tags = d.tags
-    blogDao.insertBlog(d.title, d.text, 0, d.tags, timeUtile.getNow(), null, function (result) {
+    blogDao.insertBlog(d.title, d.intro, d.text, 0, d.tags, timeUtile.getNow(), null, function (result) {
         response.writeHead(200, {
             "Content-Type": "text/html;charset:utf-8"
         });
@@ -34,11 +34,6 @@ function  getBlog(request,response) {
     var pagesize = params.pagesize;
     blogDao.selectBlog(page,pagesize,(result) => {
         blogDao.selectBlogCount(res => {
-          result.forEach(element => {
-            element.content = element.content.replace(/<img[\w\W]*">/, "");
-              element.content = element.content.replace(/<[^>]+>/g, "");
-            element.content = element.content.substring(0, 250);
-          });
           var data = {};
           data.data = result;
           data.count = res[0].count;
@@ -53,11 +48,6 @@ function  getBlog(request,response) {
 //返回最热门的5篇博客
 function getHotBlog (request,response) {
     blogDao.selectHotBlog(5,(res)=>{
-        for (var i = 0; i < res.length; i++) {
-            res[i].content = res[i].content.replace(/<img[\w\W]*">/, "");
-            res[i].content = res[i].content.replace(/<[^>]+>/g, "");
-            res[i].content = res[i].content.substring(0, 250);
-        }
         response.writeHead(200, {
             "Content-Type": "text/html;charset:utf-8"
         });

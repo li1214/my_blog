@@ -6,6 +6,9 @@
         <el-form-item label="文章标签" prop="tags">
             <el-input v-model="form.tags"></el-input>
         </el-form-item>
+        <el-form-item label="文章简介" prop="intro">
+            <el-input type="textarea" :rows="3" placeholder="请输入文章简介" v-model="form.intro"></el-input>
+        </el-form-item>
         <el-form-item label="编辑文章" prop="text">
             <mark-down @on-save='getText'/>
         </el-form-item>
@@ -24,11 +27,13 @@ export default {
             form:{
                 title:'',
                 tags:'',
-                text:''
+                text:'',
+                intro:''
             },
             rules:{
                 title:[{ required: true, message: '请输入文章标题', trigger: 'blur' }],
                 tags:[{ required: true, message: '请输入文章标签', trigger: 'blur' }],
+                intro: [{ required: true, message: '请输入文章简介', trigger: 'blur' }],
                 text: [],
             }
         }
@@ -59,7 +64,8 @@ export default {
                 data:JSON.stringify({
                     text:this.form.text,
                     tags:this.form.tags,
-                    title:this.form.title
+                    title:this.form.title,
+                    intro:this.form.intro
                 }),
                 headers: { 'Access-Control-Allow-Origin': '*', "Content-Type": "application/json;charset=UTF-8" },
             }).then(res => {
