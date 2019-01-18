@@ -63,7 +63,7 @@ export default {
                 }),
                 headers: { 'Access-Control-Allow-Origin': '*', "Content-Type": "application/json;charset=UTF-8" },
             }).then(res => {
-                if(res.data.status == 200){
+                if(res.status == 200){
                     this.$alert(res.msg);
                 }
             }).catch(e => {console.log(e)})

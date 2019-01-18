@@ -26,8 +26,6 @@
         props:['title','blogid','parentId','parentName'],
         data() {
             var validateCode = (rule, value, callback) => {
-                console.log(value.toLowerCase())
-                console.log(this)
                if (value.toLowerCase() != this.comments.codeText.toLowerCase()) {
                      callback(new Error('验证码错误'));
                 } else {
