@@ -1,7 +1,6 @@
 .DS_Store
 .history/
 node_modules/
-dist/
 upload/
 package-lock
 yarn-error.log
