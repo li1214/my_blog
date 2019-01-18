@@ -55,7 +55,7 @@ function getHotBlog (request,response) {
     blogDao.selectHotBlog(5,(res)=>{
         for (var i = 0; i < res.length; i++) {
             res[i].content = res[i].content.replace(/<img[\w\W]*">/, "");
-            res[i].content = res[i].content.replace(/<[\w\W]{1,5}>/g, "");
+            res[i].content = res[i].content.replace(/<[^>]+>/g, "");
             res[i].content = res[i].content.substring(0, 250);
         }
         response.writeHead(200, {
