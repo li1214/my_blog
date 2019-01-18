@@ -1,12 +1,12 @@
 # 个人博客
 
-#### 技术栈： vue jquery bootstrap node express mysql
+### 技术栈： vue element-ui axios vur-router jquery bootstrap node express mysql 
 
 ### npm install
 
-#### 数据库配置路径 ./dao/DBUtil.js
+### 数据库配置路径 ./dao/DBUtil.js
 
-#### node index.js
+### node index.js
 
 ### 前端部分分俩快 
 

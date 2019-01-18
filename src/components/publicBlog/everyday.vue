@@ -53,7 +53,7 @@
                     headers: { 'Access-Control-Allow-Origin': '*', "Content-Type": "application/json;charset=UTF-8" },
                     data:JSON.stringify({ctext: this.from.ctext, etext: this.from.etext, author: this.from.author})
                 }).then(res => {
-                    if (res.ret == 200) {
+                    if (res.data.status == 200) {
                         this.$alert(res.data.msg);
                     }
                 }).catch(e => console.log(e))

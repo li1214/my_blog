@@ -2,20 +2,22 @@
   <el-row class='every-day'>
     <i class="el-icon-loading"></i>
     <span>每日一句</span>
-    <p v-html='content'></p>
+    <p>{{everyday.ctext}}</p>
+    <p>{{everyday.etext}}</p>
+    <p class='author'>———— {{everyday.author}}</p>
   </el-row>
 </template>
 <script>
   export default {
       data () {
           return {
-              content:''
+              everyday:null
           }
       },
       created() {
           this.$axios.get("getEveryday").then(res => {
               if (res.status == 200) {
-                  this.content = res.data.data[0]['content']
+                  this.everyday = res.data.data[0]
               }
           });
       },
@@ -42,5 +44,8 @@
         font-size: 14px;
         word-wrap:break-word;
         line-height: 24px;
+    }
+    .author{
+        text-align: right
     }
 </style>
