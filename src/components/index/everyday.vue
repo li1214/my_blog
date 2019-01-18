@@ -11,7 +11,11 @@
   export default {
       data () {
           return {
-              everyday:null
+              everyday:{
+                  ctext:'',
+                  etext:'',
+                  author:''
+              }
           }
       },
       created() {

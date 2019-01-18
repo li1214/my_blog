@@ -6,6 +6,7 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import './registerServiceWorker'
 import axios from "axios"
+import './assets/markdown.css'
 
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
