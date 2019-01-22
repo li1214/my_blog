@@ -22,6 +22,7 @@ Vue.use(ElementUI)
 // })
 
 Vue.filter('toDate', (d) => {
+  console.log(d)
   var date = new Date(d * 1000);
   var Y, M, D;
   Y = date.getFullYear();
