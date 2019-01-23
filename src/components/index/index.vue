@@ -18,8 +18,8 @@ export default {
             pagesize:5,
             count:0,
             list: [],
-            keyword:'',
-            tag:''
+            keyword: this.$route.query.keyword,
+            tag:this.$route.query.tag
         }
     },
     created() {
@@ -30,9 +30,9 @@ export default {
             this.page = i;
         },
         getBlogList () {
-            if(this.keyword !== ''){
+            if(this.keyword && this.keyword != undefined){
                 this.getBlogListByKeyword()
-            }else if(this.tag !== ''){
+            }else if(this.tag && this.tag != undefined){
                 this.getBlogListByTag()
             }else{
                 this.$axios.get('getBlog',{params:{page:this.page,pagesize:this.pagesize}}).then(res => {
@@ -68,6 +68,14 @@ export default {
                     this.count = res.data.data[0].count;
                 }
             }).catch(e => console.log(e))
+        }
+    },
+    watch: {
+        $route () {
+            this.tag = this.$route.query.tag
+        }, 
+        tag : function () {
+            this.getBlogList()
         }
     },
 }

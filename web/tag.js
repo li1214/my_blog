@@ -79,13 +79,21 @@ function selectTagCount(request, response) {
     var params = url.parse(request.url, true).query;
     var tag = params.tag;
     tagDao.selectTag(tag, res => {
-        tag_blog_mappingDao.selectByTagIdCount(res[0].id, result => {
+        if(res[0].id){
+            tag_blog_mappingDao.selectByTagIdCount(res[0].id, result => {
+                response.writeHead(200, {
+                    "Content-Type": "text/html;charset:utf-8"
+                });
+                response.write(writeRes.writeRes("200", "查询成功!", result));
+                response.end();
+            });
+        }else{
             response.writeHead(200, {
                 "Content-Type": "text/html;charset:utf-8"
             });
-            response.write(writeRes.writeRes("200", "查询成功!", result));
+            response.write(writeRes.writeRes("200", "查询成功!", []));
             response.end();
-        });
+        }
     });
 }
 

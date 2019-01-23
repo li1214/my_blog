@@ -20,7 +20,6 @@
       },
       created() {
           this.$axios.get("getEveryday").then(res => {
-              console.log(res)
               if (res.status == 200) {
                   this.everyday = res.data.data[0]
               }

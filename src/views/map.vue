@@ -57,7 +57,6 @@
                         arr.push({ title: this.toDate(d[i].ctime) + ' ' + d[i].title, id: d[i].id, year:this.getYear(d[i].ctime),isBlog: true})
                     }
                 }
-                console.log(arr)
                 this.bloglist = arr;
             }
         },

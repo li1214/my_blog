@@ -4,7 +4,7 @@
     <div class="contents">
       <ul class="list-group">
         <li class="list-group-item" v-for="item in hots" :key="item.id">
-          <a :href="item.link">{{ item.title }}</a>
+          <router-link :to="'/home/blog/' + item.id" tag='a'>{{ item.title }}</router-link>
         </li>
       </ul>
     </div>

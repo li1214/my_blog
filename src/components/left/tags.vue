@@ -2,7 +2,7 @@
     <div class="right-box" style="margin-top:25px;">
         <h4 :style='{color:color}'>随机标签云</h4>
         <p class="contents">
-            <a v-for='tag in tags' v-bind:style='{color:randomColor(),fontSize:randomSize()}' @click='toIndex(tag.tag)'>{{tag.tag}}</a>
+            <a v-for='tag in tags'  class='tag' v-bind:style='{color:randomColor(),fontSize:randomSize()}' @click='toIndex(tag.tag)'>{{tag.tag}}</a>
         </p>
     </div>
 </template>
@@ -31,10 +31,11 @@ export default {
     },
     created() {
         this.getTags();
+
     },
     methods: {
-        toIndex () {
-            console.log(arguments)
+        toIndex (tag) {
+            this.$router.push({name:'index',query:{tag:tag}})
         },
         getTags() {
             this.$axios.get("selectRandomTag").then(res => {
@@ -50,3 +51,6 @@ export default {
     },
 }
 </script>
+<style scoped>
+    .tag{cursor: pointer;}
+</style>

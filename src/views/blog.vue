@@ -15,7 +15,7 @@
             <div class="blog-content markdown-preview Dark" v-html="blog.content"></div>
         </div>
         <liuyan :title='blog.title' :blogid="blogid"  @replay='replay' />
-        <subly ref='subly' :title='blog.title' :blogid='blogid' :parentId='parentId' :parentName='parentName' />
+        <subly ref='subly' :title='"留言"' :blogid='blogid' :parentId='parentId' :parentName='parentName' />
     </div>
 </template>
 <script>
