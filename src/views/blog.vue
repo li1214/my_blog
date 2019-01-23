@@ -48,6 +48,14 @@ export default {
              });
          },
     },
+    watch: {
+        $route () {
+            this.blogid = this.$route.params.id
+        },
+        blogid () {
+            this.getBlog()
+        }
+    },
 }
 </script>
 
