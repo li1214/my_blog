@@ -12,14 +12,14 @@ Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
 Vue.use(ElementUI)
 
-// const baseUrl = "http://localhost:12306/";
+const baseUrl = "http://localhost:12306/";
 
-// axios.interceptors.request.use(function (config) {
-//   config.url = baseUrl + config.url;
-//   return config
-// }, function (error) {
-//   return Promise.reject(error)
-// })
+axios.interceptors.request.use(function (config) {
+  config.url = baseUrl + config.url;
+  return config
+}, function (error) {
+  return Promise.reject(error)
+})
 
 Vue.filter('toDate', (d) => {
   var date = new Date(d * 1000);

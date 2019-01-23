@@ -49,7 +49,13 @@ export default {
                 }
             });
         },
-    }
+    },
+    watch: {
+        blogid () {
+            this.getComments();
+            this.getCommentsCount();
+        }
+    },
 }
 </script>
 <style scoped>
