@@ -3,7 +3,7 @@
         <everyday />
         <div class="blog-list">
             <blog-item v-for='item in list' :blog='item'></blog-item>
-            <el-pagination v-if='count/pagesize > 1' background layout="prev, pager, next" :pageSize='5' :total="100" @current-change='changepage' style='margin-top: 20px' />
+            <el-pagination v-if='count/pagesize > 1' background layout="prev, pager, next" :pageSize='pagesize' :total="count" @current-change='changepage' style='margin-top: 20px' />
         </div>
     </el-row>
 </template>
