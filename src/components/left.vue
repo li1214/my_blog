@@ -2,8 +2,12 @@
     <div>
         <keep-alive>
             <tags :color='color' />
+        </keep-alive>
+        <keep-alive>
             <hots :color='color' />
-            <comments :color='color' />
+        </keep-alive>
+        <comments :color='color' />
+        <keep-alive>
             <links :color='color' />
         </keep-alive>
     </div>

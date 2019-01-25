@@ -25,7 +25,7 @@ const router = new Router({
           path: "index",
           name: "index",
           component: index,
-          meta: { keepAlive: false }
+          meta: { keepAlive: true }
         },
         {
           path: "about",
