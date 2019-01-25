@@ -1,7 +1,10 @@
 <template>
 <el-row :gutter="20">
   <el-col :span="16" class='left'>
-    <router-view/>
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive" />
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive" />
   </el-col>
   <el-col :span="8" class='right'>
     <l-left />

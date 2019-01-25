@@ -1,9 +1,11 @@
 <template>
     <div>
-        <tags :color='color' />
-        <hots :color='color'/>
-        <comments :color='color'/>
-        <links :color='color'/>
+        <keep-alive>
+            <tags :color='color' />
+            <hots :color='color' />
+            <comments :color='color' />
+            <links :color='color' />
+        </keep-alive>
     </div>
 </template>
 <script>

@@ -3,7 +3,10 @@
     <el-row><l-header /></el-row>
     <el-row :gutter="20">
       <el-col :span="14" :offset="5">
-        <router-view />
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive" />
+      </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive" />
       </el-col>
     </el-row>
     <el-row v-if='routeName'><l-footer /></el-row>

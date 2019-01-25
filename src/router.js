@@ -24,34 +24,40 @@ const router = new Router({
         {
           path: "index",
           name: "index",
-          component: index
+          component: index,
+          meta: { keepAlive: false }
         },
         {
           path: "about",
           name: "about",
-          component: about
+          component: about,
+          meta: { keepAlive:true}
         },
         {
           path: "liuyan",
           name: "liuyan",
-          component: liuyan
+          component: liuyan,
+          meta: { keepAlive: true }
         },
         {
           path: "blog/:id",
           name: "blog",
-          component: blog
+          component: blog,
+          meta: { keepAlive: true }
         }
       ]
     },
     {
       path: "/publicblog",
       name: "publicblog",
-      component: PublicBlog
+      component: PublicBlog,
+      meta: { keepAlive: true }
     },
     {
       path: "/map",
       name: "map",
-      component: map
+      component: map,
+      meta: { keepAlive: true }
     }
   ]
 });
