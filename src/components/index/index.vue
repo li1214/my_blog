@@ -28,6 +28,7 @@ export default {
     methods: {
         changepage(i) {
             this.page = i;
+            this.getBlogList()
         },
         getBlogList () {
             if(this.keyword && this.keyword != undefined){
