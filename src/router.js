@@ -25,7 +25,7 @@ const router = new Router({
           path: "index",
           name: "index",
           component: index,
-          meta: { keepAlive: false }
+          meta: { keepAlive: true }
         },
         {
           path: "about",
@@ -57,17 +57,17 @@ const router = new Router({
       path: "/map",
       name: "map",
       component: map,
-      meta: { keepAlive: false }
+      meta: { keepAlive: true }
     }
   ]
 });
 ;
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.length === 0) {                                        //如果未匹配到路由
-    next('/home/index');   //如果上级也未匹配到路由则跳转登录页面，如果上级能匹配到则转上级路由
+  if (to.matched.length === 0) {
+    next('/home/index');  
   } else {
-    next();                                                                            //如果匹配到正确跳转
+    next();                                                                            
   }
 });
 
