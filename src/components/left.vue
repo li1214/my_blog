@@ -1,13 +1,9 @@
 <template>
     <div>
-        <keep-alive>
-            <tags :color='color' />
-        </keep-alive>
-        <keep-alive>
-            <hots :color='color' />
-        </keep-alive>
+        <tags :color='color' />
+        <hots :color='color' />
         <comments :color='color' />
-        <keep-alive>
+        <keep-alive></keep-alive>
             <links :color='color' />
         </keep-alive>
     </div>

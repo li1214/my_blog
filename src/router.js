@@ -25,7 +25,7 @@ const router = new Router({
           path: "index",
           name: "index",
           component: index,
-          meta: { keepAlive: true }
+          meta: { keepAlive: false }
         },
         {
           path: "about",
@@ -57,7 +57,7 @@ const router = new Router({
       path: "/map",
       name: "map",
       component: map,
-      meta: { keepAlive: true }
+      meta: { keepAlive: false }
     }
   ]
 });
