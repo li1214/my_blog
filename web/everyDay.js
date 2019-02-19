@@ -1,4 +1,4 @@
-
+ 
 var everydayDao = require('../dao/everyday');
 var timeUtile = require("../util/ctime");
 var writeRes = require('../util/response')
