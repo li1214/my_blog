@@ -5,7 +5,7 @@
       <ul>
         <li><router-link to="/home/index" tag='a'>首页</router-link></li>
         <li><router-link to="/map" tag='a'>地图</router-link></li>
-        <li><a href="http://www.li1214.xyz">关于</a></li>
+        <li><a href="http://resume.57301456.top">关于</a></li>
         <li><router-link to="/home/liuyan" tag='a'>留言</router-link></li>
       </ul>
     </el-col>
