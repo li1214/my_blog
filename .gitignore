@@ -4,6 +4,7 @@ node_modules/
 upload/
 package-lock
 yarn-error.log
+dao/DBUtil.js
 
 # Editor directories and files
 .idea
